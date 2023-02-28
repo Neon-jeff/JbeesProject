@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .serializer import MenuSerializer,OrderSerializer
-from .models import MenuItem,Order
+from .serializer import MenuSerializer,OrderSerializer,OrderItemSerializer
+from .models import MenuItem,Order,OrderItem
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import json
@@ -18,12 +18,19 @@ class OrderView(APIView):
         return Response(serializer.data)
     
     def post(self,request):
-        order=json.loads(request.body.decode('utf-8'))
-        serializer=OrderSerializer(data=order)
+        order=json.loads(request.body)
+        serializer=OrderSerializer(data=order)  
         
         if serializer.is_valid(raise_exception=True):
+            print(serializer.validated_data) 
+            # print(serializer.instance)
             serializer.save()
             return Response(serializer.data)
+            
+
+class OrderItemView(generics.ListCreateAPIView):
+    serializer_class=OrderItemSerializer
+    queryset=OrderItem.objects.all()
         
 
 

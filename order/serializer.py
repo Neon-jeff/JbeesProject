@@ -1,40 +1,50 @@
 from rest_framework import serializers
-from .models import Order, MenuItem
+from .models import Order, MenuItem,OrderItem,Table
 import json
 
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
-        model=MenuItem()
+        model=MenuItem
         ordering=['-id']
         fields='__all__'
 
-
+class OrderItemSerializer(serializers.ModelSerializer):
+    product=MenuSerializer()
+    class Meta:
+        model=OrderItem
+        fields='__all__'
+        ordering=['-id']
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    orderItem=MenuSerializer(many=True,read_only=True)
+    # orderItem=MenuSerializer(many=True,read_only=True)
+    order_name=OrderItemSerializer(many=True,allow_null=True,required=False)
     class Meta:
         model=Order
         ordering=['-id']
         fields='__all__'
-
+        
     
     def create(self, validated_data):
+        orders=self.initial_data['order_item']
+        # create order instance
+        orderInstance=Order.objects.create(
+            table=Table.objects.get(id=self.initial_data['table']),
+            total_price=self.initial_data['total_price']
+        )
+        # create order instance related items 
+        for i in orders:
+            OrderItem.objects.create(
+            amount=i['amount'],
+            product=MenuItem.objects.get(id=i['product']['id']),
+            order_made=orderInstance
+            )
+        #  attach order items to related instance  
+        orderInstance.order_name.set=OrderItem.objects.filter(order_made=orderInstance)
+        # update serializer field
+        self.order_name=orderInstance.order_name
+        orderInstance.save()
+        return orderInstance
+   
        
-        dance_ids = []
-        for dance in self.initial_data['orderItem']:
-            print(dance)
-            if 'id' not in dance:
-                raise serializers.ValidationError({'detail': 'key error'})
-            dance_ids.append(dance['id'])
-            print
 
-        new_order = Order.objects.create(**validated_data)
-        
-        if dance_ids:
-            for dance_id in dance_ids:
-                new_order.orderItem.add(dance_id)
-                for i in range(len(dance_ids)-1):
-                    new_order.orderItem[i]=self.initial_data['orderItem'][i]
-        new_order.save()
-        return new_order
