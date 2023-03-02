@@ -36,6 +36,7 @@ CSRF_TRUSTED_ORIGINS=[
 INSTALLED_APPS = [
     
     'channels',
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -67,13 +68,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'menu.urls'
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("containers-us-west-70.railway.app", 7431)],
+#         },
+#     },
+# }
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("containers-us-west-70.railway.app", 7431)],
-        },
-    },
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
 }
 TEMPLATES = [
     {
