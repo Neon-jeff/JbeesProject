@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-kp&7k+c(6=2l=gv4#s+#fgs2d!ilb$m$uj+6-#61+j9$*-244l
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS=[
+    'https://stereotyped-bike-production-5012.up.railway.app'
+]
 
 # Application definition
 
