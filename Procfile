@@ -1,1 +1,1 @@
-daphne menu.asgi:application
+daphne -p 8001 menu.asgi:application
