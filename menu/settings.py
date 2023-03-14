@@ -28,13 +28,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS=[
-    'https://stereotyped-bike-production-5012.up.railway.app'
+    'https://stereotyped-bike-production-5012.up.railway.app',
+      'ws://stereotyped-bike-production-5012.up.railway.app',
+
 ]
 
 # Application definition
 
 INSTALLED_APPS = [
-    
     'channels',
     'daphne',
     'django.contrib.admin',
@@ -48,8 +49,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'msgresponse'
-    
-
 ]
 ASGI_APPLICATION='menu.asgi.application'
 CORS_ALLOW_ALL_ORIGINS=True
@@ -72,11 +71,17 @@ ROOT_URLCONF = 'menu.urls'
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "PASSWORD":"xazVebn9v6iZfMoRLaEF",
+        "URL":"redis://default:xazVebn9v6iZfMoRLaEF@containers-us-west-70.railway.app:7431",
+        
         "CONFIG": {
-            "hosts": [("containers-us-west-70.railway.app", 7431)],
+            "hosts": [('redis://default:xazVebn9v6iZfMoRLaEF@containers-us-west-70.railway.app:7431')],
+           
         },
     },
 }
+
+
 # CHANNEL_LAYERS = {
 #     "default": {
 #         "BACKEND": "channels.layers.InMemoryChannelLayer"

@@ -1,4 +1,4 @@
-from channels.generic.websocket import AsyncWebsocketConsumer,JsonWebsocketConsumer,AsyncConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 from channels.exceptions import StopConsumer
 
@@ -7,7 +7,7 @@ class ResponseConsumer(AsyncWebsocketConsumer):
         self.room_name='chatroom'
         self.room_group_name='chat' + self.room_name
         await self.accept()
-        await self.send(text_data='Hello World')
+        await self.send(text_data='connected')
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
