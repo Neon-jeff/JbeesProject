@@ -4,21 +4,21 @@ from channels.routing import ProtocolTypeRouter,URLRouter,get_default_applicatio
 from django.core.asgi import get_asgi_application
 from channels.security.websocket import AllowedHostsOriginValidator
 from django.urls import path,re_path
-from asgiref.headers import asgi_add_header
+# from asgiref import headers
 from msgresponse.consumers import ResponseConsumer
 
 
 
-def cors_middleware(get_response):
-    async def middleware(scope, receive, send):
-        response = await get_response(scope, receive, send)
+# def cors_middleware(get_response):
+#     async def middleware(scope, receive, send):
+#         response = await get_response(scope, receive, send)
 
-        asgi_add_header(response, b'access-control-allow-origin', b'*')
-        asgi_add_header(response, b'access-control-allow-headers', b'*')
+#         asgi_add_header(response, b'access-control-allow-origin', b'*')
+#         asgi_add_header(response, b'access-control-allow-headers', b'*')
 
-        return response
+#         return response
 
-    return middleware
+#     return middleware
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'menu.settings')
 # Initialize Django ASGI application early to ensure the AppRegistry
 # is populated before importing code that may import ORM models.
@@ -34,4 +34,4 @@ application = ProtocolTypeRouter({
    )
    )
 })
-application = cors_middleware(application) 
+# application = cors_middleware(application)
