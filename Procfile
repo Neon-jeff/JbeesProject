@@ -1,1 +1,1 @@
-web: uvicorn menu.asgi:application --workers 4
+web: uvicorn menu.asgi:application  --workers 4 --bind 0.0.0.0:8000
