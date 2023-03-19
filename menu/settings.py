@@ -30,8 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS=[
-    'https://',
-      'wss://',
+  'https://jb-api-7ex7.onrender.com'
 
 ]
 
