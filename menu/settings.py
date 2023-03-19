@@ -12,24 +12,26 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+env=environ.Env()
+environ.Env().read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kp&7k+c(6=2l=gv4#s+#fgs2d!ilb$m$uj+6-#61+j9$*-244l'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS=[
-    'https://stereotyped-bike-production-5012.up.railway.app',
-      'ws://stereotyped-bike-production-5012.up.railway.app',
+    'https://',
+      'wss://',
 
 ]
 
@@ -73,10 +75,10 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "PASSWORD":"xazVebn9v6iZfMoRLaEF",
         "URL":"redis://default:xazVebn9v6iZfMoRLaEF@containers-us-west-70.railway.app:7431",
-        
+
         "CONFIG": {
             "hosts": [('redis://default:xazVebn9v6iZfMoRLaEF@containers-us-west-70.railway.app:7431')],
-           
+
         },
     },
 }
@@ -108,16 +110,17 @@ WSGI_APPLICATION = 'menu.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER':'postgres',
-        'PASSWORD':'WfgOncyv4QEEpoK7yCGA',
-        'HOST':'containers-us-west-188.railway.app',
-        'PORT':'5728'
-    }
+    'default':dj_database_url.parse(env('DB_URL'))
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'railway',
+    #     'USER':'postgres',
+    #     'PASSWORD':'WfgOncyv4QEEpoK7yCGA',
+    #     'HOST':'containers-us-west-188.railway.app',
+    #     'PORT':'5728'
+    # }
 }
 
 
