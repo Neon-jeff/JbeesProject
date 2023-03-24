@@ -76,7 +76,7 @@ CHANNEL_LAYERS = {
         "URL":"redis://default:xazVebn9v6iZfMoRLaEF@containers-us-west-70.railway.app:7431",
 
         "CONFIG": {
-            "hosts": [('redis://default:xazVebn9v6iZfMoRLaEF@containers-us-west-70.railway.app:7431')],
+            "hosts": [(env('REDIS_URL'))],
 
         },
     },
