@@ -7,6 +7,8 @@ class MenuSerializer(serializers.ModelSerializer):
         model=MenuItem
         ordering=['-id']
         fields='__all__'
+    def create(self, validated_data):
+        return MenuItem.objects.create(**validated_data)
 
 class OrderItemSerializer(serializers.ModelSerializer):
     product=MenuSerializer()
@@ -23,8 +25,8 @@ class OrderSerializer(serializers.ModelSerializer):
         model=Order
         ordering=['-id']
         fields='__all__'
-        
-    
+
+
     def create(self, validated_data):
         orders=self.initial_data['order_item']
         # create order instance
@@ -32,19 +34,19 @@ class OrderSerializer(serializers.ModelSerializer):
             table=Table.objects.get(id=self.initial_data['table']),
             total_price=self.initial_data['total_price']
         )
-        # create order instance related items 
+        # create order instance related items
         for i in orders:
             OrderItem.objects.create(
             amount=i['amount'],
             product=MenuItem.objects.get(id=i['product']['id']),
             order_made=orderInstance
             )
-        #  attach order items to related instance  
+        #  attach order items to related instance
         orderInstance.order_name.set=OrderItem.objects.filter(order_made=orderInstance)
         # update serializer field
         self.order_name=orderInstance.order_name
         orderInstance.save()
         return orderInstance
-   
-       
+
+
 

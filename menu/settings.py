@@ -69,15 +69,24 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'menu.urls'
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "PASSWORD":"xazVebn9v6iZfMoRLaEF",
+#         "URL":"redis://default:xazVebn9v6iZfMoRLaEF@containers-us-west-70.railway.app:7431",
+
+#         "CONFIG": {
+#             "hosts": [(env('REDIS_URL'))],
+
+#         },
+#     },
+# }
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "PASSWORD":"xazVebn9v6iZfMoRLaEF",
-        "URL":"redis://default:xazVebn9v6iZfMoRLaEF@containers-us-west-70.railway.app:7431",
-
         "CONFIG": {
-            "hosts": [(env('REDIS_URL'))],
-
+            "hosts": [("127.0.0.1", 6379)],
         },
     },
 }

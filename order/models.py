@@ -15,14 +15,14 @@ class MenuItem(models.Model):
     ("Cocktail ", "Cocktail"),
     ("Grills", "Grills"),
     ("Meals", "Meals"),
-    
+
 )
     name=models.CharField(max_length=255)
     price=models.IntegerField()
     available_amount=models.IntegerField()
     group=models.CharField(choices=item_Group, max_length=250)
 
-    
+
     def __str__(self) -> str:
         return str(self.name)
 
@@ -30,6 +30,8 @@ class Order(models.Model):
     table=models.ForeignKey(Table,on_delete=models.CASCADE)
     created=models.DateTimeField(auto_now_add=True)
     total_price=models.IntegerField(default=0)
+    processed=models.BooleanField(default=False)
+    rejected=models.BooleanField(default=False)
 
     class Meta:
         ordering=['-created']
@@ -40,8 +42,8 @@ class OrderItem(models.Model):
     order_made=models.ForeignKey(Order,on_delete=models.CASCADE,related_name='order_name',blank=True)
     product=models.ForeignKey(MenuItem,on_delete=models.CASCADE)
     amount=models.IntegerField(default=0)
-    
-    
+
+
 
     def __str__(self) -> str:
         return str(self.order_made.table) +'Table Order'
