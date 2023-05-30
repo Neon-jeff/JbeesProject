@@ -48,5 +48,11 @@ class OrderSerializer(serializers.ModelSerializer):
         orderInstance.save()
         return orderInstance
 
+        # def update(self, instance, validated_data):
+        #     instance=Order.objects.get(id=validated_data['id'])
+        #     instance.processed=validated_data['processed']
+        #     instance.rejected=validated_data['rejected']
+        #     instance.save()
+        #     return instance
 
 

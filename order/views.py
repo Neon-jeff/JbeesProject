@@ -34,7 +34,17 @@ class OrderView(APIView):
             # print(serializer.instance)
             serializer.save()
             return Response(serializer.data)
+    # def put(self,request):
+    #     order=json.loads(request.body)
+    #     serializer=OrderSerializer(data=order)
 
+    #     if serializer.is_valid(raise_exception=True):
+    #         serializer.save()
+    #         return Response(serializer.data)
+
+class OrderUpdateView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class=OrderSerializer
+    queryset=Order.objects.all()
 
 class OrderItemView(generics.ListCreateAPIView):
     serializer_class=OrderItemSerializer
