@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Order, MenuItem,OrderItem,Table
 import json
+from drf_writable_nested import WritableNestedModelSerializer
 
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,9 +19,9 @@ class OrderItemSerializer(serializers.ModelSerializer):
         ordering=['-id']
 
 
-class OrderSerializer(serializers.ModelSerializer):
+class OrderSerializer(WritableNestedModelSerializer,serializers.ModelSerializer):
     # orderItem=MenuSerializer(many=True,read_only=True)
-    order_name=OrderItemSerializer(many=True,allow_null=True,required=False)
+    order_name=OrderItemSerializer(many=True,allow_null=True,required=False,read_only=True)
     class Meta:
         model=Order
         ordering=['-id']
@@ -55,4 +56,4 @@ class OrderSerializer(serializers.ModelSerializer):
         #     instance.save()
         #     return instance
 
-
+# i had to install pip install drf-writable-nested this package to allow me update nested elements
