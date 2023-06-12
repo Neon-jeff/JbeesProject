@@ -72,9 +72,6 @@ ROOT_URLCONF = 'menu.urls'
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "PASSWORD":"xazVebn9v6iZfMoRLaEF",
-        "URL":"redis://default:xazVebn9v6iZfMoRLaEF@containers-us-west-70.railway.app:7431",
-
         "CONFIG": {
             "hosts": [(env('REDIS_URL'))],
 
@@ -121,14 +118,7 @@ WSGI_APPLICATION = 'menu.wsgi.application'
 import dj_database_url
 DATABASES = {
     'default':dj_database_url.parse(env('DB_URL'))
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'railway',
-    #     'USER':'postgres',
-    #     'PASSWORD':'WfgOncyv4QEEpoK7yCGA',
-    #     'HOST':'containers-us-west-188.railway.app',
-    #     'PORT':'5728'
-    # }
+
 }
 
 
