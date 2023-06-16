@@ -19,23 +19,27 @@ class ResponseConsumer(AsyncWebsocketConsumer):
             message=text_data_json['message']
             sender=text_data_json['sender']
             time=text_data_json['time']
+            table=text_data_json['table']
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
                 'type':'chat_message',
                 'message':message,
                 'sender':sender,
-                'time':time
+                'time':time,
+                'table':table
                 }
                 )
     async def chat_message(self,event):
         message=event['message']
         sender=event['sender']
         time=event['time']
+        table=event['table']
         await self.send(text_data=json.dumps({
             'message':message,
             'sender':sender,
-            'time':time
+            'time':time,
+            'table':table
         }))
     async def disconnect(self, code):
         await self.channel_layer.group_discard(
