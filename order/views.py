@@ -4,15 +4,17 @@ from .serializer import MenuSerializer,OrderSerializer,OrderItemSerializer
 from .models import MenuItem,Order,OrderItem
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser,FormParser
 import json
 # Create your views here.
 
 class ListMenu(APIView):
     menu=MenuItem.objects.all()
+    parser_classes=[MultiPartParser,FormParser]
     def get(self,request):
         serializer=MenuSerializer(self.menu,many=True)
         return Response(serializer.data)
-    def post(self,request):
+    def post(self,request,format=None):
         menu=json.loads(request.body)
         serializer=MenuSerializer(data=menu)
         if serializer.is_valid(raise_exception=True):

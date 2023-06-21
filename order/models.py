@@ -20,6 +20,7 @@ class MenuItem(models.Model):
     name=models.CharField(max_length=255)
     price=models.IntegerField()
     available_amount=models.IntegerField()
+    image=models.ImageField( upload_to='images/',null=True,blank=True)
     group=models.CharField(choices=item_Group, max_length=250)
 
 
