@@ -18,7 +18,7 @@ class ListMenu(APIView):
         menu=json.loads(request.body)
         serializer=MenuSerializer(data=menu)
         if serializer.is_valid(raise_exception=True):
-            print(serializer.validated_data)
+
             serializer.save()
             return Response(serializer.data)
 class OrderView(APIView):

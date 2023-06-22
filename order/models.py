@@ -1,6 +1,12 @@
 from django.db import models
 from django.db.models.signals import pre_save
+from django.conf import settings
+from django.contrib.sites.models import Site
 
+domain = Site.objects.get(id=5).domain
+
+
+media_url=getattr(settings,'MEDIA_URL')
 # Create your models here.
 class Table(models.Model):
     name=models.CharField(max_length=200)
@@ -21,8 +27,13 @@ class MenuItem(models.Model):
     price=models.IntegerField()
     available_amount=models.IntegerField()
     image=models.ImageField( upload_to='images/',null=True,blank=True)
+    image_url=models.URLField(max_length=200,null=True,blank=True)
     group=models.CharField(choices=item_Group, max_length=250)
 
+    def save(self,*args,**kwargs):
+        if self.image:
+            self.image_url=f'{domain}{media_url}{self.image}'
+        super(MenuItem, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return str(self.name)

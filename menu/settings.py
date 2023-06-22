@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'whitenoise.runserver_nostatic',
     'order',
     'rest_framework',
@@ -68,7 +69,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'menu.urls'
-
+SITE_ID = 5
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
