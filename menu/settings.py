@@ -39,7 +39,8 @@ cloudinary.config(
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS=[
-  'https://jb-api-7ex7.onrender.com'
+  'https://jb-api-7ex7.onrender.com',
+  'http://127.0.0.1:5173'
 
 ]
 
