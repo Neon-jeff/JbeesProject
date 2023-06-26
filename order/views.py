@@ -15,10 +15,9 @@ class ListMenu(APIView):
         serializer=MenuSerializer(self.menu,many=True)
         return Response(serializer.data)
     def post(self,request,format=None):
-        menu=json.loads(request.body)
-        serializer=MenuSerializer(data=menu)
+        print(request.data)
+        serializer=MenuSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-
             serializer.save()
             return Response(serializer.data)
 class OrderView(APIView):
