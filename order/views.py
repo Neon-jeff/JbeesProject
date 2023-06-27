@@ -9,10 +9,10 @@ import json
 # Create your views here.
 
 class ListMenu(APIView):
-    menu=MenuItem.objects.all()
     parser_classes=[MultiPartParser,FormParser]
     def get(self,request):
-        serializer=MenuSerializer(self.menu,many=True)
+        menu=MenuItem.objects.all()
+        serializer=MenuSerializer(menu,many=True)
         return Response(serializer.data)
     def post(self,request,format=None):
         print(request.data)
