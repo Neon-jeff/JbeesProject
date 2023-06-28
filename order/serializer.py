@@ -32,7 +32,7 @@ class OrderSerializer(WritableNestedModelSerializer,serializers.ModelSerializer)
         orders=self.initial_data['order_item']
         # create order instance
         orderInstance=Order.objects.create(
-            table=Table.objects.get(id=self.initial_data['table']),
+            table=Table.objects.get(table_No=self.initial_data['table']),
             total_price=self.initial_data['total_price']
         )
         # create order instance related items
