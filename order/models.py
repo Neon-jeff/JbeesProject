@@ -31,7 +31,7 @@ class MenuItem(models.Model):
         return str(self.name)
 
 class Order(models.Model):
-    table=models.ForeignKey(Table,on_delete=models.CASCADE)
+    table=models.ForeignKey(Table,on_delete=models.CASCADE,null=True,blank=True)
     created=models.DateTimeField(auto_now_add=True)
     total_price=models.IntegerField(default=0)
     processed=models.BooleanField(default=False)
