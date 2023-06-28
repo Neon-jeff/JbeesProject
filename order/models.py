@@ -40,6 +40,8 @@ class Order(models.Model):
     class Meta:
         ordering=['-created']
     def __str__(self) -> str:
+        if self.table==None:
+            return "Online Order"
         return str(self.table) + ' Order'
 
 class OrderItem(models.Model):
