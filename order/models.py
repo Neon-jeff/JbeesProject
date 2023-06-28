@@ -36,7 +36,7 @@ class Order(models.Model):
     total_price=models.IntegerField(default=0)
     processed=models.BooleanField(default=False)
     rejected=models.BooleanField(default=False)
-
+    phone= models.CharField(max_length=11, blank=True, null=True)
     class Meta:
         ordering=['-created']
     def __str__(self) -> str:
