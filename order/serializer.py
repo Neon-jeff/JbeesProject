@@ -35,7 +35,7 @@ class OrderSerializer(WritableNestedModelSerializer,serializers.ModelSerializer)
             total_price=self.initial_data['total_price'],
         )
         # check for online order
-        if self.initial_data != None:
+        if self.initial_data['table'] != None:
             orderInstance.table=Table.objects.get(table_No=self.initial_data['table'])
         if self.initial_data['phone']!=None:
             orderInstance.phone=self.initial_data['phone']
