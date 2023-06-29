@@ -65,7 +65,8 @@ INSTALLED_APPS = [
 ASGI_APPLICATION='menu.asgi.application'
 CORS_ALLOWED_ORIGINS = [
 "https://jb-api-7ex7.onrender.com",
-"http://127.0.0.1:5173"
+"http://127.0.0.1:5173",
+"https://jbees-menu.vercel.app"
 ]
 
 MIDDLEWARE = [
