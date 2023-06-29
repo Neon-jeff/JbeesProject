@@ -32,10 +32,13 @@ class OrderSerializer(WritableNestedModelSerializer,serializers.ModelSerializer)
         orders=self.initial_data['order_item']
         # create order instance
         orderInstance=Order.objects.create(
-            table=Table.objects.get(table_No=self.initial_data['table']),
             total_price=self.initial_data['total_price'],
-            phone=self.initial_data['phone']
         )
+        # check for online order
+        if self.initial_data != None:
+            orderInstance.table=Table.objects.get(table_No=self.initial_data['table'])
+        if self.initial_data['phone']!=None:
+            orderInstance.phone=self.initial_data['phone']
         # create order instance related items
         for i in orders:
             OrderItem.objects.create(
