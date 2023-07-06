@@ -21,7 +21,7 @@ class MenuItem(models.Model):
     ("Milkshakes", "Milkshakes"),
     ("Meals", "Meals"),
     ("Tots", "Tots"),
-    ("Milkshakes", "Milkshakes"),
+    ("Regular Drinks", "Regular Drinks")
 
 )
     name=models.CharField(max_length=255)
