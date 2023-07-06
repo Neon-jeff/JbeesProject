@@ -46,6 +46,18 @@ class OrderUpdateView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=OrderSerializer
     queryset=Order.objects.all()
 
+class MenuItemUpdateView(APIView):
+    parser_classes=[MultiPartParser,FormParser]
+    def get_object(self, pk):
+        return MenuItem.objects.get(pk=pk)
+
+    def patch(self, request, pk):
+        menu_object = self.get_object(pk)
+        serializer = MenuSerializer(menu_object, data=request.data, partial=True) # set partial=True to update a data partially
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+
 class OrderItemView(generics.ListCreateAPIView):
     serializer_class=OrderItemSerializer
     queryset=OrderItem.objects.all()

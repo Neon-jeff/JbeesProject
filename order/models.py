@@ -15,15 +15,18 @@ class Table(models.Model):
 
 class MenuItem(models.Model):
     item_Group = (
-    ("Alcohol", "Alchohol"),
-    ("Cocktail ", "Cocktail"),
-    ("Grills", "Grills"),
+    ("Exotic Drinks", "Exotic Drinks"),
+    ("Cocktail", "Cocktail"),
+    ("Mocktails", "Mocktails"),
+    ("Milkshakes", "Milkshakes"),
     ("Meals", "Meals"),
+    ("Tots", "Tots"),
+    ("Milkshakes", "Milkshakes"),
 
 )
     name=models.CharField(max_length=255)
     price=models.IntegerField()
-    available_amount=models.IntegerField()
+    available=models.BooleanField(default=True)
     group=models.CharField(choices=item_Group, max_length=250)
     image = CloudinaryField('image',blank=True,null=True)
 
