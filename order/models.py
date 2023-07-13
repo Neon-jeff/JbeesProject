@@ -21,9 +21,10 @@ class MenuItem(models.Model):
     ("Milkshakes", "Milkshakes"),
     ("Meals", "Meals"),
     ("Tots", "Tots"),
-    ("Regular Drinks","Regular Drinks"),
+    ("Soft Drinks","Soft Drinks"),
     ("Platters","Platters"),
-    ("Proteins","Proteins")
+    ("Proteins","Proteins"),
+    ("Shisha","Shisha"),
 
 
 )

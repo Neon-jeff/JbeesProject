@@ -51,7 +51,7 @@ class MenuItemUpdateView(APIView):
     def get_object(self, pk):
         return MenuItem.objects.get(pk=pk)
 
-    def patch(self, request, pk):
+    def patch(self, request, pk,format=None):
         menu_object = self.get_object(pk)
         serializer = MenuSerializer(menu_object, data=request.data, partial=True) # set partial=True to update a data partially
         if serializer.is_valid(raise_exception=True):
