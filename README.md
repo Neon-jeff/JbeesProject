@@ -16,10 +16,13 @@ Jbees api server with django restframework for RESTFUL services and django chann
 **FRONTEND URL**
 
    **Landing Page**
+   
    https://jbees-menu.vercel.app
    
    **App Entry point**
+   
    https://jbees-menu.vercel.app/lounge/1
+   
    This is the entry point for the customer to select items and request an order,
    the order is handled and processed by a customised admin panel, built with better
    user friendly features with some extra functionality.
