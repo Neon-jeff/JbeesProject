@@ -1,5 +1,5 @@
 # JbeesProject
-Jbees api server with django restframework,django channels for websockets connection
+Jbees api server with django restframework for RESTFUL services and django channels for websockets connection
 
 **Endpoints**
 1.   https://jb-api-7ex7.onrender.com/api/menu/
@@ -14,10 +14,11 @@ Jbees api server with django restframework,django channels for websockets connec
     Update order status
 
 **FRONTEND URL**
-   Landing Page
+
+   **Landing Page**
    https://jbees-menu.vercel.app
    
-   App Entry point
+   **App Entry point**
    https://jbees-menu.vercel.app/lounge/1
    This is the entry point for the customer to select items and request an order,
    the order is handled and processed by a customised admin panel, built with better
